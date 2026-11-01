@@ -21,6 +21,8 @@ def choose_polygon(rgb):
 
     def selected(points):
         vertices[:] = points
+        axis.set_title("Selection captured — close this window to analyze")
+        fig.canvas.draw_idle()
 
     selector = PolygonSelector(axis, selected, useblit=True)
     plt.show()
