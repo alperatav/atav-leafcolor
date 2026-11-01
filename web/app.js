@@ -18,6 +18,7 @@ let imageName = "leaf-image";
 let basePixels = null;
 let points = [];
 let lastReport = null;
+let drawing = false;
 
 input.addEventListener("change", event => {
   const file = event.target.files[0];
@@ -35,7 +36,7 @@ input.addEventListener("change", event => {
     points = [];
     results.hidden = true;
     updateControls();
-    instruction.textContent = "Tap around one leaf, then choose Analyze leaf.";
+    instruction.textContent = "Trace once around one leaf without lifting your finger.";
     URL.revokeObjectURL(url);
   };
   loaded.src = url;
@@ -44,14 +45,42 @@ input.addEventListener("change", event => {
 canvas.addEventListener("pointerdown", event => {
   if (!imageLoaded || !basePixels) return;
   event.preventDefault();
-  const rect = canvas.getBoundingClientRect();
-  points.push({
-    x: (event.clientX - rect.left) * canvas.width / rect.width,
-    y: (event.clientY - rect.top) * canvas.height / rect.height
-  });
+  points = [];
+  drawing = true;
+  results.hidden = true;
+  canvas.setPointerCapture(event.pointerId);
+  addTracePoint(event);
+});
+
+canvas.addEventListener("pointermove", event => {
+  if (!drawing) return;
+  event.preventDefault();
+  addTracePoint(event);
+});
+
+function finishTrace(event) {
+  if (!drawing) return;
+  drawing = false;
+  if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
   redrawOutline();
   updateControls();
-});
+}
+
+canvas.addEventListener("pointerup", finishTrace);
+canvas.addEventListener("pointercancel", finishTrace);
+
+function addTracePoint(event) {
+  const rect = canvas.getBoundingClientRect();
+  const point = {
+    x: (event.clientX - rect.left) * canvas.width / rect.width,
+    y: (event.clientY - rect.top) * canvas.height / rect.height
+  };
+  const previous = points.at(-1);
+  if (previous && Math.hypot(point.x - previous.x, point.y - previous.y) < 8) return;
+  points.push(point);
+  redrawOutline();
+  updateControls();
+}
 
 undoButton.addEventListener("click", () => { points.pop(); redrawOutline(); updateControls(); });
 resetButton.addEventListener("click", () => { points = []; redrawOutline(); updateControls(); results.hidden = true; });
