@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173f2a">
+  <title>Atav LeafColor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">OFFLINE RESEARCH PROTOTYPE</p>
+      <h1>Atav LeafColor <span>🌱</span></h1>
+      <p>Measure visible leaf yellowing locally. No API, upload, or server.</p>
+    </header>
+    <section class="card controls">
+      <label class="file-button"><input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp">Choose leaf image</label>
+      <p id="instruction">Choose an image, then tap around one leaf.</p>
+      <div class="button-row">
+        <button id="undoButton" disabled>Undo point</button>
+        <button id="resetButton" disabled>Reset outline</button>
+        <button id="analyzeButton" class="primary" disabled>Analyze leaf</button>
+      </div>
+    </section>
+    <section class="card canvas-card">
+      <canvas id="imageCanvas"></canvas>
+      <p class="hint">Place at least 3 points around a single leaf. The final edge closes automatically.</p>
+    </section>
+    <section id="results" class="card results" hidden>
+      <h2>Measurement</h2>
+      <div class="metrics">
+        <article><strong id="yellowPercent">–</strong><span>Visible yellowing</span></article>
+        <article><strong id="severityScore">–</strong><span>Weighted severity</span></article>
+        <article><strong id="validPixels">–</strong><span>Analyzed pixels</span></article>
+      </div>
+      <canvas id="heatmapCanvas"></canvas>
+      <p class="notice">Baseline color measurement only; it does not diagnose disease or nutrient deficiency.</p>
+      <button id="downloadButton">Download JSON report</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
