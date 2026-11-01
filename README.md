@@ -31,7 +31,7 @@ python app.py path/to/leaf.jpg
 
 On Windows, activate the environment with `.venv\Scripts\activate`.
 
-Click around one leaf in the opened window and press Enter. The program writes a JSON report and a heatmap into `results/`.
+Click around one leaf, click the first point again to finish the outline, and close the image window. The program writes a JSON report and a heatmap into `results/`.
 
 ## Current outputs
 
