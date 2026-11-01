@@ -15,7 +15,7 @@ The current `v0.1` implementation is a transparent HSV-based baseline. It measur
 1. Download this repository as a ZIP and extract it.
 2. Open `web/index.html` in Chrome.
 3. Choose a leaf image.
-4. Tap or click around one leaf with at least three points.
+4. Touch or click the leaf edge and drag once around it without lifting.
 5. Select **Analyze leaf**.
 
 The browser version is fully local: the selected image is not uploaded anywhere and no API is used.
