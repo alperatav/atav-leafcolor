@@ -1,0 +1,26 @@
+:root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #eef4ef; color: #17221b; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.shell { width: min(920px, 100%); margin: auto; padding: 28px 16px 60px; }
+header { margin-bottom: 22px; }
+.eyebrow { margin: 0; color: #397250; font-size: .76rem; font-weight: 800; letter-spacing: .12em; }
+h1 { margin: 8px 0; font-size: clamp(2rem, 8vw, 3.8rem); line-height: 1; }
+header > p:last-child { color: #526158; }
+.card { background: #fff; border: 1px solid #dce7df; border-radius: 18px; padding: 18px; margin: 14px 0; box-shadow: 0 8px 30px rgba(23, 63, 42, .06); }
+.controls { display: grid; gap: 12px; }
+.file-button, button { border: 0; border-radius: 12px; padding: 12px 16px; font: inherit; font-weight: 700; cursor: pointer; }
+.file-button { display: inline-block; width: fit-content; background: #173f2a; color: white; }
+.file-button input { display: none; }
+button { background: #e7efe9; color: #173f2a; }
+button.primary { background: #2a7b4b; color: white; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+.button-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.canvas-card { overflow: hidden; }
+canvas { display: block; max-width: 100%; height: auto; margin: auto; border-radius: 12px; touch-action: none; }
+#imageCanvas { background: #dfe8e1; min-height: 180px; }
+.hint, .notice { color: #647168; font-size: .9rem; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+.metrics article { background: #f1f6f2; padding: 14px; border-radius: 14px; }
+.metrics strong { display: block; color: #1e6a40; font-size: clamp(1.25rem, 5vw, 2rem); }
+.metrics span { display: block; color: #617067; font-size: .82rem; margin-top: 4px; }
+@media (max-width: 580px) { .metrics { grid-template-columns: 1fr; } }
