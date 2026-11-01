@@ -27,10 +27,15 @@ class LeafColorResult:
         return asdict(self)
 
 
-def load_rgb(path: str | Path) -> np.ndarray:
-    """Load an image as an RGB float array in the range [0, 1]."""
+def load_rgb(path: str | Path, max_dimension: int = 1024) -> np.ndarray:
+    """Load an image as RGB and resize consistently for both local runners."""
     with Image.open(path) as image:
-        return np.asarray(image.convert("RGB"), dtype=np.float32) / 255.0
+        image = image.convert("RGB")
+        scale = min(1.0, max_dimension / max(image.size))
+        if scale < 1.0:
+            size = tuple(round(dimension * scale) for dimension in image.size)
+            image = image.resize(size, Image.Resampling.LANCZOS)
+        return np.asarray(image, dtype=np.float32) / 255.0
 
 
 def polygon_mask(shape: tuple[int, int], vertices: list[tuple[float, float]]) -> np.ndarray:
